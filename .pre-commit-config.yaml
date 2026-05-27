@@ -1,10 +1,6 @@
 minimum_pre_commit_version: 2.21.0
 exclude: ^LICENSE|^README.md|^.clang-format|^.pre-commit-config.yaml|\.(html|csv|svg)$
 
-ci:
-  autofix_prs: false
-  autoupdate_schedule: monthly
-
 repos:
   # pre-commit 基础检查
   - repo: https://github.com/pre-commit/pre-commit-hooks
