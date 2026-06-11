@@ -20,7 +20,11 @@
 若您希望**从零到一快速体验**项目能力，请参照下述编译安装教程。
 
 #### 1. [获取 HPCKit 软件包](https://www.hikunpeng.com/document/detail/zh/kunpenghpcs/hpckit/instg/KunpengHPCKit_install_007.html)
-> https://www.hikunpeng.com/developer/hpc/hpckit-download
+
+##### 下载 HPCKit 软件包（HPCKit 版本号根据实际情况调整）
+```
+wget https://mirrors.huaweicloud.com/kunpeng/archive/HPC/HPCKit/HPCKit_26.0.RC1_Linux-aarch64.tar.gz
+```
 
 #### 2. [安装 HPCKit](https://www.hikunpeng.com/document/detail/zh/kunpenghpcs/hpckit/instg/KunpengHPCKit_install_012.html)
 
@@ -28,6 +32,7 @@
 ```
 tar xvf HPCKit_26.0.RC1_Linux-aarch64.tar.gz
 ```
+
 ##### 安装 HPCKit
 ```
 sh HPCKit_26.0.RC1_Linux-aarch64/install.sh -y --prefix=[HPCKit安装目录]
@@ -87,6 +92,31 @@ sh build.sh --install_path=/path/to/your/kutacc-path --build_type=Release
 - Debug模式：
 ```
 sh build.sh --install_path=/path/to/your/kutacc-path --build_type=Debug
+```
+
+#### 6. 编译运行测试程序
+
+需要编译并加载 Bisheng 版本的 googletest。
+
+指定编译 googletest 的编译器为 Bisheng
+```
+export CC=clang
+export CXX=clang++
+```
+参考 https://github.com/google/googletest/tree/main/googletest 编译 googletest
+
+将 googletest 加入到环境变量中
+```
+export INCLUDE=[googletest安装目录]/include:$INCLUDE
+export LIBRARY_PATH=[googletest安装目录]/lib:$LIBRARY_PATH
+export LD_LIBRARY_PATH=[googletest安装目录]/lib:$LD_LIBRARY_PATH
+```
+
+编译运行测试程序
+```
+sh build.sh --build_kind=test
+cd test
+sh test_all.sh
 ```
 
 ## 📖学习教程

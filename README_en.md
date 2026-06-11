@@ -21,7 +21,10 @@ Follow the build and installation guide below for a quick, start-from-scratch ex
 
 ### 1. [Obtain the HPCKit software package](https://www.hikunpeng.com/document/detail/zh/kunpenghpcs/hpckit/instg/KunpengHPCKit_install_007.html).
 
-> https://www.hikunpeng.com/developer/hpc/hpckit-download
+#### Download the HPCKit software package（replace the version number in the example with your actual version）
+```
+wget https://mirrors.huaweicloud.com/kunpeng/archive/HPC/HPCKit/HPCKit_26.0.RC1_Linux-aarch64.tar.gz
+```
 
 ### 2. [Install HPCKit](https://www.hikunpeng.com/document/detail/zh/kunpenghpcs/hpckit/instg/KunpengHPCKit_install_012.html).
 
@@ -39,7 +42,7 @@ sh HPCKit_26.0.RC1_Linux-aarch64/install.sh -y --prefix=[HPCKit_installation_dir
 
 ### 3. [Set environment variables](https://www.hikunpeng.com/document/detail/zh/kunpenghpcs/hpckit/instg/KunpengHPCKit_install_014.html).
 
-##### Install the Module environment management tool (requires yum repository to be configured).
+#### Install the Module environment management tool (requires yum repository to be configured).
 ```
 yum install environment-modules
 ```
@@ -76,17 +79,17 @@ yum install cmake
 ### 5. Build and install from source.
 
 - If you choose to download the source code package
-##### Upload and extract the KuTACC project source package (replace the branch name in the example with your actual branch).
+#### Upload and extract the KuTACC project source package (replace the branch name in the example with your actual branch).
 ```
 unzip kutacc-main.zip
 ```
 
-##### Navigate to the root directory of the KuTACC project source code (replace the branch name in the example with your actual branch).
+#### Navigate to the root directory of the KuTACC project source code (replace the branch name in the example with your actual branch).
 ```
 cd kutacc-main
 ```
 
-##### Build and install.
+#### Build and install.
 Go to the KuTACC root directory and use `build.sh` to install KuTACC to any specified path. Both release and debug modes are supported.
 - Release mode：
 ```
@@ -95,6 +98,31 @@ sh build.sh --install_path=/path/to/your/kutacc-path --build_type=Release
 - Debug mode：
 ```
 sh build.sh --install_path=/path/to/your/kutacc-path --build_type=Debug
+```
+
+### 6. Compile and run the test program
+
+Compile and Load the Bisheng Version of GoogleTest
+
+Set the compiler for GoogleTest to Bisheng
+```
+export CC=clang
+export CXX=clang++
+```
+Refer to https://github.com/google/googletest/tree/main/googletest to compile GoogleTest
+
+Add GoogleTest to the environment variables
+```
+export INCLUDE=[googletest安装目录]/include:$INCLUDE
+export LIBRARY_PATH=[googletest安装目录]/lib:$LIBRARY_PATH
+export LD_LIBRARY_PATH=[googletest安装目录]/lib:$LD_LIBRARY_PATH
+```
+
+Compile and run the test program
+```
+sh build.sh --build_kind=test
+cd test
+sh test_all.sh
 ```
 
 ## 📖Tutorials
